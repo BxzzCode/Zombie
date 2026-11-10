@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#101310">
+  <meta name="description" content="Sobrevive a la horda en ZombiLand, un shooter de supervivencia 3D.">
+  <title>ZombiLand — Sobrevive a la horda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <div id="game-root" aria-label="Escenario 3D de ZombiLand"></div>
+    <div class="vignette"></div>
+
+    <section id="menu-screen" class="screen menu-screen">
+      <div class="menu-top"><div class="brand-mark">Z<span>L</span></div><div class="top-label">PROTOCOLO DE SUPERVIVENCIA <i></i> SECTOR 07</div><button class="icon-btn" id="menu-settings" title="Ajustes" aria-label="Ajustes">⚙</button></div>
+      <div class="menu-copy">
+        <p class="eyebrow"><span class="pulse"></span> LA CIUDAD HA CAÍDO</p>
+        <h1>ZOMBI<span>LAND</span></h1>
+        <p class="menu-description">La noche no termina. La horda tampoco.<br>¿Cuánto tiempo vas a sobrevivir?</p>
+        <button class="primary-btn" id="start-btn"><span>INICIAR SUPERVIVENCIA</span><b>↗</b></button>
+        <div class="menu-footnote"><span>▶</span> JOYSTICK PARA MOVERSE &nbsp;·&nbsp; DESLIZA PARA MIRAR</div>
+      </div>
+      <div class="menu-bottom"><span>© 2025 ZOMBILAND SURVIVAL</span><span class="live-status"><i></i> SEÑAL ACTIVA</span><span>NO HAY EXTRACCIÓN</span></div>
+      <div class="menu-card"><span class="card-kicker">RECOMPENSA DE SUPERVIVENCIA</span><strong>MONEDAS <b>×</b> <em>∞</em></strong><small>EL BOTÍN ES TUYO. SI SOBREVIVES.</small></div>
+    </section>
+
+    <section id="hud" class="hud hidden">
+      <div class="hud-top">
+        <div class="stat-card wave-card"><span class="stat-label">OLEADA</span><strong id="wave-value">01</strong><small id="zombie-count">0 ENEMIGOS</small></div>
+        <div class="objective"><span class="objective-dot"></span><span id="objective-text">ELIMINA A LA HORDA</span></div>
+        <div class="hud-right"><div class="coin-counter"><span class="coin-icon">◉</span><span id="coin-value">0</span></div><button class="pause-btn" id="pause-btn" aria-label="Pausar">Ⅱ</button></div>
+      </div>
+      <div class="crosshair"><i></i><i></i><i></i><i></i><b></b></div>
+      <div class="hit-marker" id="hit-marker">✕</div>
+      <div class="hud-bottom">
+        <div class="health-panel"><div class="health-icon">♥</div><div class="health-info"><div class="health-top"><span>ESTADO</span><strong id="health-number">100</strong></div><div class="bar-track"><div id="health-bar" class="health-fill"></div></div></div></div>
+        <div class="controls-hint"><span>W A S D</span> MOVER <b>·</b> <span>CLICK</span> DISPARAR <b>·</b> <span>ESC</span> PAUSA</div>
+        <div class="ammo-panel"><span class="ammo-label">ARMA PRINCIPAL</span><strong>RANGER <i>9MM</i></strong><div class="ammo-line"><span id="ammo-value">12</span><small>/ ∞</small><span class="ammo-icon">▰</span></div></div>
+      </div>
+      <div id="look-area" class="look-area" aria-label="Desliza para mover la cámara"></div>
+      <div id="joystick" class="joystick"><div id="joystick-stick" class="joystick-stick"></div></div>
+      <div class="touch-actions"><button id="camera-btn" class="touch-btn camera-touch" aria-label="Cambiar cámara">3ª PERSONA</button><button id="reload-btn" class="touch-btn">↻<small>RECARGAR</small></button><button id="shoot-btn" class="touch-btn shoot-touch">●<small>DISPARAR</small></button></div>
+      <div id="damage-flash" class="damage-flash"></div>
+    </section>
+
+    <section id="pause-screen" class="screen modal-screen hidden">
+      <div class="modal-panel"><p class="eyebrow">PAUSA DE SUPERVIVENCIA</p><h2>RESPIRA.<br><span>POR AHORA.</span></h2><p class="modal-copy">La horda espera. Tú decides cuándo volver.</p><button id="resume-btn" class="primary-btn"><span>VOLVER AL JUEGO</span><b>▶</b></button><button id="pause-settings" class="secondary-btn">⚙ &nbsp; AJUSTES</button><button id="quit-btn" class="text-btn">ABANDONAR PARTIDA</button></div>
+    </section>
+
+    <section id="settings-screen" class="screen modal-screen hidden">
+      <div class="modal-panel settings-panel"><button id="settings-close" class="close-btn" aria-label="Cerrar">×</button><p class="eyebrow">CONFIGURACIÓN</p><h2>AJUSTES<span>.</span></h2>
+        <label class="setting-row"><span><strong>VOLUMEN</strong><small>Sonidos y ambiente</small></span><input id="volume-setting" type="range" min="0" max="100" value="35"><b id="volume-label">35%</b></label>
+        <label class="setting-row"><span><strong>SENSIBILIDAD</strong><small>Velocidad de cámara</small></span><input id="sensitivity-setting" type="range" min="3" max="15" value="8"><b id="sensitivity-label">8</b></label>
+        <label class="setting-row toggle-row"><span><strong>VIBRACIÓN DE CÁMARA</strong><small>Impacto al recibir daño</small></span><input id="shake-setting" type="checkbox" checked><span class="toggle"></span></label>
+        <button id="settings-done" class="primary-btn"><span>LISTO</span><b>✓</b></button>
+      </div>
+    </section>
+
+    <section id="gameover-screen" class="screen modal-screen hidden">
+      <div class="modal-panel gameover-panel"><p class="eyebrow danger-eyebrow">SEÑAL PERDIDA</p><h2>TE HAN<br><span>ALCANZADO.</span></h2><p class="modal-copy">La horda se queda con este sector. Pero no con tu historia.</p><div class="run-results"><div><small>OLEADA</small><strong id="final-wave">01</strong></div><div><small>ZOMBIS</small><strong id="final-kills">0</strong></div><div><small>BOTÍN</small><strong id="final-coins">0</strong></div></div><button id="retry-btn" class="primary-btn"><span>INTENTAR DE NUEVO</span><b>↻</b></button><button id="home-btn" class="text-btn">VOLVER AL MENÚ</button></div>
+    </section>
+
+    <div id="toast" class="toast hidden"></div>
+    <div id="start-hint" class="start-hint hidden">USA EL JOYSTICK Y DESLIZA A LA DERECHA PARA MIRAR</div>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
